@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="Een rustige, onafhankelijke scan van licht, elektromagnetische velden en water in je woning. De resultaten worden helder en visueel gemaakt.">
+  <title>Total House Scan | The Invisible, Revealed.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2311100e'/%3E%3Cpath d='M14 31 32 16l18 15v20H14Z' fill='none' stroke='%23c7a85a' stroke-width='4'/%3E%3Cpath d='M25 51V36h14v15' fill='none' stroke='%23f7f5ef' stroke-width='4'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #11100e;
+      --ink-soft: #2a2823;
+      --paper: #f6f3ea;
+      --white: #fffef9;
+      --gold: #b8943e;
+      --gold-light: #ddc477;
+      --line: rgba(17, 16, 14, .14);
+      --muted: #676258;
+      --radius: 1.25rem;
+      --shadow: 0 22px 70px rgba(30, 25, 12, .11);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; }
+
+    .skip-link {
+      position: fixed;
+      top: .75rem;
+      left: .75rem;
+      z-index: 100;
+      padding: .7rem 1rem;
+      color: var(--white);
+      background: var(--ink);
+      transform: translateY(-160%);
+      transition: transform .2s ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .shell {
+      width: min(calc(100% - 2rem), var(--max));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      margin: 0 0 1rem;
+      color: var(--gold);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 2rem;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      letter-spacing: -.035em;
+      line-height: 1.04;
+    }
+
+    h1 {
+      max-width: 11ch;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      font-size: clamp(3.5rem, 8vw, 7.4rem);
+    }
+
+    h2 {
+      max-width: 14ch;
+      margin-bottom: 1.25rem;
+      font-size: clamp(2.35rem, 5vw, 4.5rem);
+    }
+
+    h3 {
+      margin-bottom: .55rem;
+      font-size: 1.1rem;
+      line-height: 1.3;
+    }
+
+    .lede {
+      max-width: 42rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 3.5rem;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      padding: .85rem 1.35rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--gold-light);
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .button:hover {
+      background: #ead48d;
+      box-shadow: 0 10px 28px rgba(184, 148, 62, .22);
+      transform: translateY(-2px);
+    }
+
+    .button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--gold-light);
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 20;
+      color: var(--white);
+    }
+
+    .nav {
+      display: flex;
+      min-height: 6rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .16);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      font-weight: 850;
+      letter-spacing: .015em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 3rem;
+      aspect-ratio: 1;
+      place-items: center;
+      flex: 0 0 auto;
+      color: var(--gold-light);
+    }
+
+    .brand-mark svg { width: 2.65rem; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      font-size: .92rem;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:not(.button):hover { color: var(--gold-light); }
+    .nav-links .button { min-height: 2.7rem; padding: .55rem 1rem; }
+
+    .hero {
+      position: relative;
+      min-height: 850px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 72% 38%, rgba(184, 148, 62, .2), transparent 30%),
+        linear-gradient(125deg, #0e0d0b 0%, #1d1a14 58%, #11100e 100%);
+    }
+
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: .11;
+      background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 62px 62px;
+      mask-image: linear-gradient(to right, transparent, #000 35%, #000);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      min-height: 850px;
+      align-items: center;
+      gap: 4rem;
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .8fr);
+    }
+
+    .hero-copy { padding-top: 2rem; }
+
+    .hero-copy .lede {
+      max-width: 36rem;
+      color: rgba(255,255,255,.72);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.4rem;
+      margin-top: 2rem;
+    }
+
+    .quiet-link {
+      color: var(--white);
+      text-underline-offset: .35rem;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem 1.2rem;
+      margin-top: 2.25rem;
+      padding: 0;
+      color: rgba(255,255,255,.72);
+      font-size: .88rem;
+      list-style: none;
+    }
+
+    .hero-proof li::before {
+      margin-right: .5rem;
+      color: var(--gold-light);
+      content: "◆";
+      font-size: .55rem;
+      vertical-align: .15rem;
+    }
+
+    .scan-visual {
+      position: relative;
+      width: min(100%, 520px);
+      justify-self: end;
+      filter: drop-shadow(0 35px 55px rgba(0,0,0,.32));
+    }
+
+    .scan-card {
+      position: absolute;
+      z-index: 4;
+      padding: .75rem .9rem;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: .8rem;
+      color: var(--white);
+      background: rgba(16,15,12,.74);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+      font-size: .78rem;
+    }
+
+    .scan-card strong {
+      display: block;
+      color: var(--gold-light);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .scan-card.light { top: 17%; right: -2%; }
+    .scan-card.fields { bottom: 18%; left: -5%; }
+    .scan-card.water { right: 3%; bottom: 2%; }
+
+    .hero-bottom {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 3;
+      border-top: 1px solid rgba(255,255,255,.13);
+    }
+
+    .hero-statline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-stat {
+      min-height: 5.5rem;
+      padding: 1rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,.13);
+    }
+
+    .hero-stat:first-child { border-left: 1px solid rgba(255,255,255,.13); }
+    .hero-stat strong { display: block; color: var(--gold-light); font-size: 1.1rem; }
+    .hero-stat span { color: rgba(255,255,255,.65); font-size: .84rem; }
+
+    section { padding-block: clamp(5rem, 10vw, 9rem); }
+
+    .report-product { padding-top: 0; }
+
+    .intro-grid {
+      display: grid;
+      align-items: start;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    }
+
+    .intro-copy { padding-top: 1rem; }
+
+    .plain-list {
+      display: grid;
+      margin: 2.25rem 0 0;
+      padding: 0;
+      gap: .8rem;
+      list-style: none;
+    }
+
+    .plain-list li {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr;
+      align-items: start;
+    }
+
+    .plain-list li::before {
+      color: var(--gold);
+      content: "✓";
+      font-weight: 900;
+    }
+
+    .statement {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(2rem, 5vw, 4.4rem);
+      border-radius: var(--radius);
+      color: var(--white);
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .statement::after {
+      position: absolute;
+      right: -5rem;
+      bottom: -8rem;
+      width: 22rem;
+      aspect-ratio: 1;
+      border: 1px solid rgba(221,196,119,.26);
+      border-radius: 50%;
+      content: "";
+      box-shadow: 0 0 0 3rem rgba(221,196,119,.04), 0 0 0 6rem rgba(221,196,119,.03);
+    }
+
+    .statement blockquote {
+      position: relative;
+      z-index: 2;
+      max-width: 15ch;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.12;
+    }
+
+    .statement p {
+      position: relative;
+      z-index: 2;
+      max-width: 34rem;
+      margin: 1.5rem 0 0;
+      color: rgba(255,255,255,.68);
+    }
+
+    .about-section {
+      padding-block: clamp(3rem, 6vw, 5.5rem);
+      background: #ece7dc;
+    }
+
+    .about-grid {
+      display: grid;
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5.5rem);
+      grid-template-columns: minmax(240px, .65fr) minmax(0, 1.35fr);
+    }
+
+    .about-brand {
+      display: grid;
+      min-height: 18rem;
+      place-content: center;
+      justify-items: center;
+      padding: 2rem;
+      border: 1px solid rgba(221,196,119,.46);
+      border-radius: var(--radius);
+      color: var(--white);
+      background: var(--ink);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .about-brand svg { width: 5.2rem; margin-bottom: 1.2rem; color: var(--gold-light); }
+    .about-brand strong { font-size: .92rem; letter-spacing: .2em; text-transform: uppercase; }
+    .about-brand small { margin-top: .45rem; color: var(--gold-light); font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; }
+    .about-copy h2 { max-width: 17ch; }
+    .about-copy .lede { max-width: 46rem; }
+
+    .about-reach {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 1.5rem;
+    }
+
+    .about-reach span {
+      padding: .45rem .75rem;
+      border: 1px solid rgba(17,16,14,.14);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.52);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .measurements { background: var(--white); }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-head .lede { max-width: 33rem; }
+
+    .measure-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .measure-card {
+      position: relative;
+      min-height: 32rem;
+      overflow: hidden;
+      padding: 2rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .measure-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-4px);
+    }
+
+    .measure-number {
+      display: block;
+      margin-bottom: 3rem;
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+    }
+
+    .measure-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .measure-card p { color: var(--muted); }
+
+    .measure-icon {
+      position: absolute;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      width: 10rem;
+      height: 10rem;
+      color: var(--gold);
+      opacity: .2;
+    }
+
+    .fine-print {
+      max-width: 55rem;
+      margin: 2rem 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .scan-limits {
+      max-width: 58rem;
+      margin-top: 2rem;
+      padding: clamp(1.4rem, 3vw, 2rem);
+      border: 1px solid rgba(184,148,62,.28);
+      border-left: 4px solid var(--gold);
+      border-radius: 1rem;
+      background: rgba(184,148,62,.07);
+    }
+
+    .scan-limits h3 {
+      margin: .2rem 0 .7rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      font-weight: 500;
+    }
+
+    .scan-limits p { max-width: 52rem; margin: 0; color: var(--muted); }
+
+    .limits-list {
+      display: grid;
+      margin: 1.25rem 0 0;
+      padding: 0;
+      gap: .65rem;
+      list-style: none;
+    }
+
+    .limits-list li {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      color: var(--ink-soft);
+    }
+
+    .limits-list li::before {
+      color: var(--gold);
+      content: "—";
+      font-weight: 900;
+    }
+
+    .visual-report {
+      display: grid;
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      margin-top: 2rem;
+      padding: clamp(1.7rem, 5vw, 3.5rem);
+      border-radius: var(--radius);
+      color: var(--white);
+      background: var(--ink);
+      grid-template-columns: 1fr .9fr;
+    }
+
+    .visual-report h3 {
+      max-width: 16ch;
+      margin-bottom: 1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.08;
+    }
+
+    .visual-report p { max-width: 38rem; margin-bottom: 0; color: rgba(255,255,255,.68); }
+
+    .report-preview {
+      padding: 1.2rem;
+      border: 1px solid rgba(221,196,119,.42);
+      border-radius: 1rem;
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 18px 45px rgba(0,0,0,.22);
+    }
+
+    .report-preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.3rem;
+      color: rgba(255,255,255,.7);
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .report-preview-head strong { color: var(--gold-light); }
+
+    .report-row {
+      display: grid;
+      align-items: center;
+      gap: .75rem;
+      margin-top: 1rem;
+      color: rgba(255,255,255,.8);
+      font-size: .78rem;
+      grid-template-columns: 4.5rem 1fr;
+    }
+
+    .report-track {
+      position: relative;
+      height: .65rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+    }
+
+    .report-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+
+    .report-caption { margin: 1.1rem 0 0 !important; color: rgba(255,255,255,.48) !important; font-size: .7rem; }
+
+    .report-teaser-link {
+      display: block;
+      max-width: 390px;
+      justify-self: center;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .report-stack {
+      position: relative;
+      margin: 0 1rem 1.3rem 0;
+    }
+
+    .report-stack::before {
+      position: absolute;
+      z-index: 0;
+      inset: 1.3rem -1rem -1rem 1.3rem;
+      border: 1px solid rgba(221,196,119,.38);
+      border-radius: .3rem;
+      content: "";
+      background:
+        linear-gradient(rgba(221,196,119,.06) 1px, transparent 1px),
+        #171511;
+      background-size: 100% 2.2rem;
+      transform: rotate(2.4deg);
+      transition: transform .25s ease;
+    }
+
+    .report-cover-mini {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      min-height: 31rem;
+      overflow: hidden;
+      padding: 1.45rem;
+      border: 1px solid rgba(221,196,119,.58);
+      border-radius: .25rem;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(184,148,62,.15), transparent 28%),
+        linear-gradient(140deg, #211f1b, #090807 74%);
+      box-shadow: 0 24px 55px rgba(0,0,0,.38);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .report-example-stamp {
+      position: absolute;
+      z-index: 5;
+      top: 1.15rem;
+      right: -2.3rem;
+      width: 9rem;
+      padding: .34rem 0;
+      color: var(--ink);
+      background: var(--gold-light);
+      font-size: .57rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(38deg);
+      box-shadow: 0 4px 14px rgba(0,0,0,.25);
+    }
+
+    .report-teaser-link:hover .report-cover-mini {
+      box-shadow: 0 30px 65px rgba(0,0,0,.5);
+      transform: translateY(-5px) rotate(-.5deg);
+    }
+
+    .report-teaser-link:hover .report-stack::before { transform: rotate(3.8deg) translate(3px, 2px); }
+
+    .report-cover-brand {
+      display: grid;
+      justify-items: center;
+      gap: .45rem;
+      color: var(--white);
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .report-cover-brand svg { width: 2.7rem; color: var(--gold-light); }
+    .report-cover-brand small { color: var(--gold-light); font-size: .44rem; letter-spacing: .17em; }
+
+    .report-cover-title {
+      margin: 2.2rem 0 .6rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 500;
+      letter-spacing: .11em;
+      line-height: 1.08;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .report-cover-title span { display: block; color: var(--gold-light); }
+    .report-cover-sub { color: rgba(255,255,255,.55) !important; font-size: .53rem !important; letter-spacing: .16em; text-align: center; text-transform: uppercase; }
+
+    .report-house-mini {
+      width: 100%;
+      margin: auto 0 1.4rem;
+      color: var(--gold-light);
+    }
+
+    .report-cover-stats {
+      display: grid;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(221,196,119,.32);
+      gap: .5rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .report-cover-stats span {
+      display: grid;
+      min-height: 3.2rem;
+      align-content: center;
+      border-right: 1px solid rgba(255,255,255,.13);
+      color: rgba(255,255,255,.52);
+      font-size: .47rem;
+      letter-spacing: .08em;
+      line-height: 1.35;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .report-cover-stats span:last-child { border-right: 0; }
+    .report-cover-stats strong { color: var(--white); font-size: .72rem; }
+
+    .report-teaser-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      color: var(--gold-light);
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .report-teaser-cta small { color: rgba(255,255,255,.48); font-size: .7rem; font-weight: 500; }
+
+    .process-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      counter-reset: process;
+    }
+
+    .process-step {
+      position: relative;
+      padding: 1.6rem;
+      border-top: 1px solid var(--ink);
+      counter-increment: process;
+    }
+
+    .process-step::before {
+      display: block;
+      margin-bottom: 2.5rem;
+      color: var(--gold);
+      content: "0" counter(process);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .process-step p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .process-step.bonus {
+      padding: 1.6rem;
+      border-top-color: var(--gold);
+      border-radius: 0 0 1rem 1rem;
+      background: linear-gradient(180deg, rgba(221,196,119,.2), rgba(221,196,119,.05));
+    }
+
+    .process-step.bonus::before {
+      color: var(--gold);
+      content: "04+";
+    }
+
+    .bonus-label {
+      display: inline-flex;
+      margin-bottom: .75rem;
+      padding: .28rem .6rem;
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--gold-light);
+      font-size: .67rem;
+      font-weight: 850;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .included {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .included h2 { color: var(--white); }
+    .included .lede { color: rgba(255,255,255,.66); }
+
+    .included-grid {
+      display: grid;
+      align-items: start;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .included-list {
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(255,255,255,.18);
+      list-style: none;
+    }
+
+    .included-list li {
+      display: grid;
+      padding: 1.05rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.76);
+      grid-template-columns: 1.6rem 1fr;
+    }
+
+    .included-list li::before { color: var(--gold-light); content: "✓"; font-weight: 900; }
+
+    .price-card {
+      padding: clamp(2rem, 5vw, 3.8rem);
+      border: 1px solid rgba(221,196,119,.45);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(221,196,119,.13), rgba(255,255,255,.03));
+    }
+
+    .price-card .label {
+      color: var(--gold-light);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .price {
+      margin: .5rem 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4.5rem, 9vw, 7rem);
+      line-height: 1;
+    }
+
+    .price-note { color: rgba(255,255,255,.68); }
+    .price-card .button { width: 100%; margin-top: 1.5rem; }
+
+    .other-locations {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .other-location {
+      padding: 1.1rem;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: .9rem;
+      color: rgba(255,255,255,.68);
+      font-size: .88rem;
+    }
+
+    .other-location strong { display: block; color: var(--white); }
+
+    .faq-grid {
+      display: grid;
+      align-items: start;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      grid-template-columns: .8fr 1.2fr;
+    }
+
+    .faq-list { border-top: 1px solid var(--ink); }
+
+    details { border-bottom: 1px solid var(--line); }
+
+    summary {
+      display: grid;
+      padding: 1.25rem 2.7rem 1.25rem 0;
+      font-weight: 800;
+      cursor: pointer;
+      list-style: none;
+      grid-template-columns: 1fr auto;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after { color: var(--gold); content: "+"; font-size: 1.35rem; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { max-width: 45rem; padding: 0 2.7rem 1.35rem 0; color: var(--muted); }
+
+    .request {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--ink-soft);
+    }
+
+    .request::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background: radial-gradient(circle at 8% 20%, rgba(184,148,62,.18), transparent 28%);
+    }
+
+    .request-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      align-items: start;
+      gap: clamp(2.5rem, 7vw, 7rem);
+      grid-template-columns: .85fr 1.15fr;
+    }
+
+    .request h2 { color: var(--white); }
+    .request .lede { color: rgba(255,255,255,.68); }
+
+    .contact-promises {
+      margin: 2rem 0 0;
+      padding: 0;
+      color: rgba(255,255,255,.72);
+      list-style: none;
+    }
+
+    .contact-promises li { margin-bottom: .55rem; }
+    .contact-promises li::before { margin-right: .65rem; color: var(--gold-light); content: "✓"; }
+
+    .form-card {
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 1.1rem;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field { display: grid; gap: .42rem; }
+    .field.full { grid-column: 1 / -1; }
+
+    label { font-size: .86rem; font-weight: 800; }
+    .optional { color: var(--muted); font-weight: 500; }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 3.25rem;
+      padding: .75rem .85rem;
+      border: 1px solid #cbc6ba;
+      border-radius: .65rem;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    textarea { min-height: 8rem; resize: vertical; }
+
+    .honeypot {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      clip: rect(1px, 1px, 1px, 1px) !important;
+    }
+
+    .privacy-line {
+      display: flex;
+      align-items: flex-start;
+      gap: .7rem;
+      margin: 1.15rem 0;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .privacy-line input {
+      width: 1rem;
+      min-height: 1rem;
+      margin-top: .22rem;
+      accent-color: var(--gold);
+    }
+
+    .form-card .button { width: 100%; border: 0; }
+
+    .form-meta {
+      display: flex;
+      justify-content: center;
+      gap: .4rem;
+      margin: .8rem 0 0;
+      color: var(--muted);
+      font-size: .77rem;
+      text-align: center;
+    }
+
+    .form-status {
+      display: none;
+      margin: 1rem 0 0;
+      padding: .85rem 1rem;
+      border-left: 3px solid var(--gold);
+      color: var(--ink);
+      background: #f3ead1;
+      font-size: .9rem;
+    }
+
+    .form-status.show { display: block; }
+
+    footer {
+      padding-block: 2rem;
+      color: rgba(255,255,255,.68);
+      background: #0b0a09;
+      font-size: .82rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .footer-links a { text-underline-offset: .25rem; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.button) { display: none; }
+      .hero { min-height: 1050px; }
+      .hero-inner { min-height: 970px; grid-template-columns: 1fr; }
+      .hero-copy { padding-top: 3rem; }
+      .scan-visual { width: min(88%, 470px); justify-self: center; }
+      .intro-grid, .about-grid, .included-grid, .faq-grid, .request-grid, .visual-report { grid-template-columns: 1fr; }
+      .measure-grid { grid-template-columns: 1fr; }
+      .measure-card { min-height: 23rem; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .section-head { display: block; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { width: min(calc(100% - 1.25rem), var(--max)); }
+      .brand span:last-child { font-size: .9rem; }
+      .nav-links .button { padding-inline: .8rem; font-size: .78rem; }
+      .hero { min-height: 1000px; }
+      .hero-inner { min-height: 920px; padding-top: 7rem; }
+      h1 { font-size: clamp(3.25rem, 18vw, 5.2rem); }
+      .hero-proof { display: grid; }
+      .scan-card { font-size: .68rem; }
+      .scan-card.light { right: 0; }
+      .scan-card.fields { left: 0; }
+      .hero-stat { padding: .8rem; }
+      .hero-stat strong { font-size: .9rem; }
+      .hero-stat span { font-size: .69rem; }
+      .form-grid, .other-locations { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .process-grid { grid-template-columns: 1fr; }
+      .process-step::before { margin-bottom: 1rem; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#inhoud">Naar de inhoud</a>
+
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Hoofdnavigatie">
+      <a class="brand" href="#top" aria-label="Total House Scan, naar boven">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none"><path d="M10 55V29L32 9l22 20v26H10Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M32 9v46M10 29l22 12 22-12M24 36.5V55M40 36.5V55" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        </span>
+        <span>Total House Scan</span>
+      </a>
+      <div class="nav-links">
+        <a href="#over-ons">Over ons</a>
+        <a href="#wat-we-meten">Wat we meten</a>
+        <a href="#werkwijze">Werkwijze</a>
+        <a href="#prijs">Prijs</a>
+        <a class="button" href="#aanvragen">Vraag een scan aan</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="inhoud">
+    <section class="hero" id="top">
+      <div class="hero-inner shell">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Total House Scan</p>
+          <h1>The Invisible, Revealed.</h1>
+          <p class="lede">Een rustige, onafhankelijke scan van licht, elektromagnetische velden en water. We maken de resultaten begrijpelijk én visueel.</p>
+          <div class="hero-actions">
+            <a class="button" href="#aanvragen">Vraag een scan aan <span aria-hidden="true">→</span></a>
+            <a class="quiet-link" href="#werkwijze">Bekijk hoe het werkt</a>
+          </div>
+          <ul class="hero-proof" aria-label="Belangrijkste kenmerken">
+            <li>Geen verkoop van extra producten</li>
+            <li>Geen medisch team</li>
+            <li>Visueel resultaat</li>
+            <li>Schematisch, zonder foto's</li>
+          </ul>
+        </div>
+
+        <div class="scan-visual reveal" aria-label="Illustratie van een huis dat wordt doorgemeten">
+          <svg viewBox="0 0 560 640" role="img" aria-labelledby="house-title house-desc">
+            <title id="house-title">Schematische woningmeting</title>
+            <desc id="house-desc">Een doorsnede van een woning met meetlijnen voor licht, velden en water.</desc>
+            <defs>
+              <linearGradient id="houseFill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#ddc477" stop-opacity=".03"/></linearGradient>
+              <radialGradient id="scanGlow"><stop stop-color="#ddc477" stop-opacity=".42"/><stop offset="1" stop-color="#ddc477" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="330" r="275" fill="url(#scanGlow)" opacity=".45"/>
+            <circle cx="300" cy="330" r="245" fill="none" stroke="#ddc477" stroke-opacity=".2"/>
+            <circle cx="300" cy="330" r="185" fill="none" stroke="#ddc477" stroke-opacity=".14"/>
+            <path d="M75 294 280 105l205 189v243H75V294Z" fill="url(#houseFill)" stroke="#f6f3ea" stroke-width="3"/>
+            <path d="M75 383h410M280 106v431M75 463h410" stroke="#f6f3ea" stroke-opacity=".46" stroke-width="2"/>
+            <path d="M126 337h86v46h-86zM346 324h76v59h-76zM117 409h104v54H117zM342 414h86v49h-86z" fill="#ddc477" fill-opacity=".08" stroke="#ddc477" stroke-opacity=".5"/>
+            <path d="M242 537V430h76v107" fill="none" stroke="#f6f3ea" stroke-width="2"/>
+            <g fill="#ddc477">
+              <circle cx="174" cy="352" r="6"/><circle cx="388" cy="350" r="6"/><circle cx="169" cy="436" r="6"/><circle cx="384" cy="437" r="6"/>
+            </g>
+            <g stroke="#ddc477" stroke-width="1.5" stroke-dasharray="5 7" opacity=".8">
+              <path d="M174 352 505 196"/><path d="M388 350 505 437"/><path d="M169 436 38 520"/>
+            </g>
+            <path d="M291 205c-29 35-45 64-45 87a45 45 0 0 0 90 0c0-23-16-52-45-87Z" fill="none" stroke="#ddc477" stroke-width="2" opacity=".75"/>
+            <path d="M105 234c26-30 58-45 96-47M116 255c23-21 50-32 81-34" fill="none" stroke="#ddc477" stroke-width="2" opacity=".62"/>
+          </svg>
+          <div class="scan-card light"><strong>Licht</strong>Spectrum &amp; flikkering</div>
+          <div class="scan-card fields"><strong>Velden</strong>Elektrisch, magnetisch &amp; draadloos</div>
+          <div class="scan-card water"><strong>Water</strong>Eenvoudige indicatieve meting</div>
+        </div>
+      </div>
+
+      <div class="hero-bottom" aria-label="Kerngegevens">
+        <div class="hero-statline shell">
+          <div class="hero-stat"><strong>Meestal 60–90 min</strong><span>Afhankelijk van jouw vragen</span></div>
+          <div class="hero-stat"><strong>1 helder rapport</strong><span>Visueel en praktisch</span></div>
+          <div class="hero-stat"><strong>Gratis herhaalscan</strong><span>Na eigen aanpassingen, geheel vrijblijvend</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="intro-grid shell">
+        <div class="intro-copy reveal">
+          <p class="eyebrow">Niet gissen, maar kijken</p>
+          <h2>Je woning vertelt meer dan je kunt zien.</h2>
+          <p class="lede">Licht, elektrische apparaten, draadloze signalen en water zijn iedere dag om je heen. Total House Scan maakt een aantal van die onzichtbare eigenschappen begrijpelijk.</p>
+          <ul class="plain-list">
+            <li>Je kijkt tijdens de scan gewoon mee.</li>
+            <li>Je krijgt rustige uitleg in gewone mensentaal.</li>
+            <li>We nemen uitgebreid de tijd voor iedere scan en iedere vraag.</li>
+          </ul>
+        </div>
+        <div class="statement reveal">
+          <blockquote>“Geen bangmakerij. Wel inzicht dat je kunt gebruiken.”</blockquote>
+          <p>Wij zijn geen medische professionals. Als betrokken enthousiastelingen werken we vanuit praktijkervaring met passende meetapparatuur. We maken zichtbaar wat de apparatuur registreert en geven op basis daarvan praktische aandachtspunten. We verkopen geen aanvullende producten en hebben geen belang bij eventuele vervolgaankopen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-product" id="rapport">
+      <div class="shell">
+        <div class="visual-report reveal">
+          <div>
+            <p class="eyebrow">Dit krijg je in handen</p>
+            <h3>Geen losse cijfers, maar een persoonlijk rapport dat je begrijpt.</h3>
+            <p>Bekijk een klein overzicht van het persoonlijke rapport dat u kunt verwachten. We laten genoeg zien om de heldere, visuele opbouw te begrijpen; het volledige rapport wordt speciaal samengesteld op basis van uw eigen woning en meetmomenten. Ruimtes tonen we schematisch en zonder foto's of video-opnames.</p>
+          </div>
+          <a class="report-teaser-link" href="voorbeeld-rapport.html" aria-label="Bekijk de voorbeeldsamenvatting van het Total House Scan rapport">
+            <div class="report-stack">
+              <div class="report-cover-mini">
+                <div class="report-example-stamp">Voorbeeld</div>
+                <div class="report-cover-brand">
+                  <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M10 29 32 9l22 20v26H10V29Z" stroke="currentColor" stroke-width="2"/><path d="M24 55V35h16v20M32 9v46M10 29l22 12 22-12" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>Total House Scan</span>
+                  <small>The Invisible, Revealed.</small>
+                </div>
+                <div class="report-cover-title">Woning Scan <span>Rapport</span></div>
+                <p class="report-cover-sub">Persoonlijk · visueel · begrijpelijk</p>
+                <svg class="report-house-mini" viewBox="0 0 420 175" fill="none" aria-hidden="true">
+                  <path d="M24 145h372M55 144V80l154-54 155 54v64M86 144V91h246v53M187 144v-42h46v42" stroke="currentColor" stroke-opacity=".58"/>
+                  <path d="M96 105h55v28H96zM268 105h55v28h-55zM167 73h84v21h-84z" stroke="currentColor" stroke-opacity=".42"/>
+                  <path d="M30 145c23-18 39-18 57 0M333 145c18-23 38-23 56 0" stroke="currentColor" stroke-opacity=".35"/>
+                  <circle cx="124" cy="119" r="3" fill="currentColor"/><circle cx="295" cy="119" r="3" fill="currentColor"/><circle cx="209" cy="84" r="3" fill="currentColor"/>
+                </svg>
+                <div class="report-cover-stats">
+                  <span><strong>5</strong>Meetcategorieën</span>
+                  <span><strong>4</strong>Gemeten ruimtes</span>
+                  <span><strong>16</strong>Meetpunten</span>
+                </div>
+              </div>
+            </div>
+            <span class="report-teaser-cta">Bekijk het rapportvoorbeeld <span aria-hidden="true">→</span> <small>een klein overzicht met fictieve gegevens</small></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="over-ons">
+      <div class="about-grid shell">
+        <div class="about-brand reveal" aria-label="Total House Scan">
+          <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M10 29 32 9l22 20v26H10V29Z" stroke="currentColor" stroke-width="2"/><path d="M24 55V35h16v20M32 9v46M10 29l22 12 22-12" stroke="currentColor" stroke-width="2"/></svg>
+          <strong>Total House Scan</strong>
+          <small>The Invisible, Revealed.</small>
+        </div>
+        <div class="about-copy reveal">
+          <p class="eyebrow">Over ons</p>
+          <h2>Vanuit de Bollenstreek, actief tot over de grens.</h2>
+          <p class="lede">Total House Scan is op dit moment een klein, betrokken team van enthousiaste mensen met praktijkervaring en passende meetapparatuur. Vanuit de Bollenstreek zijn we inmiddels door heel Nederland actief. Naast woningen bezochten we al veel winkels en een aantal scholen. Ook in België hebben we locaties mogen scannen.</p>
+          <div class="about-reach" aria-label="Werkgebied en ervaring"><span>Bollenstreek</span><span>Heel Nederland</span><span>Ook België</span><span>Woningen</span><span>Winkels</span><span>Scholen</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="measurements" id="wat-we-meten">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Drie onderdelen</p>
+            <h2>Wat we zichtbaar maken.</h2>
+          </div>
+          <p class="lede">Geen ingewikkeld technisch onderzoek, maar een brede eerste indruk van de leefomgeving in je woning.</p>
+        </div>
+
+        <div class="measure-grid">
+          <article class="measure-card reveal">
+            <span class="measure-number">01</span>
+            <h3>Licht</h3>
+            <p>We bekijken onder meer het lichtspectrum en opvallende flikkering van verschillende lichtbronnen in huis.</p>
+            <svg class="measure-icon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="16" fill="none" stroke="currentColor" stroke-width="2"/><path d="M50 4v22M50 74v22M4 50h22M74 50h22M18 18l16 16M66 66l16 16M82 18 66 34M34 66 18 82" stroke="currentColor" stroke-width="2"/></svg>
+          </article>
+          <article class="measure-card reveal">
+            <span class="measure-number">02</span>
+            <h3>Elektromagnetische velden</h3>
+            <p>We brengen elektrische en magnetische velden en draadloze radiofrequente signalen indicatief in beeld.</p>
+            <svg class="measure-icon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="68" r="5"/><path d="M30 48a28 28 0 0 1 40 0M20 37a43 43 0 0 1 60 0M40 58a14 14 0 0 1 20 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          </article>
+          <article class="measure-card reveal">
+            <span class="measure-number">03</span>
+            <h3>Water</h3>
+            <p>Met een eenvoudige meter bekijken we een paar indicatieve eigenschappen van het kraanwater. Geen laboratoriumanalyse.</p>
+            <svg class="measure-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 9C31 32 22 47 22 63a28 28 0 0 0 56 0c0-16-9-31-28-54Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M34 64c2 9 8 14 17 16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          </article>
+        </div>
+        <aside class="scan-limits reveal" aria-labelledby="grenzen-scan">
+          <p class="eyebrow">Goed om te weten</p>
+          <h3 id="grenzen-scan">De grenzen van de scan</h3>
+          <p>Total House Scan maakt meetwaarden zichtbaar en helpt je die praktisch te begrijpen. De scan is informatief en heeft een duidelijk afgebakende rol.</p>
+          <ul class="limits-list">
+            <li>De metingen zijn een momentopname; omstandigheden kunnen per moment en per dag verschillen.</li>
+            <li>We stellen geen medische diagnose en geven geen medisch behandeladvies.</li>
+            <li>De scan is geen bouwkundige inspectie, elektrische veiligheidskeuring of laboratoriumonderzoek.</li>
+            <li>Bij twijfel over gezondheid, constructie, elektra of waterveiligheid verwijzen we naar de juiste erkende specialist.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="werkwijze">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Van aanvraag tot vergelijking</p>
+            <h2>Zo werkt een scan.</h2>
+          </div>
+          <p class="lede">Persoonlijk, zorgvuldig en helder.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-step reveal"><h3>Vrijblijvend voorgesprek</h3><p>Na je aanvraag nemen wij bij voorkeur telefonisch contact met je op. Heb je liever e-mail of WhatsApp, dan houden we daar uiteraard rekening mee. We beantwoorden je vragen en leggen de scan duidelijk uit.</p></article>
+          <article class="process-step reveal"><h3>We meten samen</h3><p>De meeste bezoeken duren 60–90 minuten, afhankelijk van jouw vragen. We nemen zorgvuldig de tijd voor de scan en de uitleg.</p></article>
+          <article class="process-step reveal"><h3>Je krijgt overzicht</h3><p>Je ontvangt een duidelijk visueel rapport met bevindingen en praktische aandachtspunten.</p></article>
+          <article class="process-step bonus reveal"><span class="bonus-label">Gratis bonus</span><h3>Vrijblijvende herhaalscan</h3><p>Heb je zelf iets aangepast en wil je het verschil zien? Dan zijn wij ook nieuwsgierig. We komen geheel vrijblijvend en zonder extra kosten terug voor een korte herhaalscan en een volledig visueel vergelijkingsrapport. De herhaalafspraak moet binnen acht weken na de eerste scan worden ingepland; daarna vervalt deze bonus.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="included" id="prijs">
+      <div class="included-grid shell">
+        <div class="reveal">
+          <p class="eyebrow">Eén duidelijke prijs</p>
+          <h2>Alles wat je nodig hebt om zelf te kiezen.</h2>
+          <p class="lede">De prijs geldt uitsluitend voor de scan, uitleg en rapportage. We verkopen geen meetapparatuur, lampen, filters, afschermingsproducten of andere aanvullende producten.</p>
+          <ul class="included-list">
+            <li>Vrijblijvend voorgesprek via telefoon, e-mail of WhatsApp</li>
+            <li>Scan meestal 60–90 minuten, afhankelijk van jouw vragen</li>
+            <li>Live uitleg tijdens de metingen</li>
+            <li>Visueel rapport met praktische aandachtspunten</li>
+            <li>Gratis en vrijblijvende herhaalscan nadat je zelf iets hebt aangepast, mits binnen acht weken ingepland</li>
+            <li>Volledig visueel vergelijkingsrapport van beide meetmomenten</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="price-card">
+            <span class="label">Complete woningscan</span>
+            <div class="price">€530</div>
+            <p class="price-note">All-in voor een woning in Nederland, inclusief btw, normale reiskosten en de optionele gratis herhaalscan met volledig vergelijkingsrapport. Bij uitzonderlijke reis- of toegangskosten overleggen we altijd vooraf.</p>
+            <a class="button" href="#aanvragen">Vraag vrijblijvend aan <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="other-locations">
+            <div class="other-location"><strong>Bedrijfspand?</strong>Bespreekbaar; prijs op maat.</div>
+            <div class="other-location"><strong>Buiten Nederland?</strong>Bespreekbaar op basis van locatie.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="veelgestelde-vragen">
+      <div class="faq-grid shell">
+        <div class="reveal">
+          <p class="eyebrow">Goed om te weten</p>
+          <h2>Veelgestelde vragen.</h2>
+          <p class="lede">Staat je vraag er niet tussen? Laat hem achter bij je aanvraag; dan bespreken we hem persoonlijk.</p>
+        </div>
+        <div class="faq-list reveal">
+          <details>
+            <summary>Zit ik na mijn aanvraag ergens aan vast?</summary>
+            <p>Nee. Na je aanvraag nemen wij contact met je op via de contactmethode van jouw voorkeur. We beantwoorden je vragen en leggen de scan uit. Alleen als we beiden akkoord zijn, plannen we een afspraak. Pas dan ontstaat een betalingsverplichting.</p>
+          </details>
+          <details>
+            <summary>Is dit een medische of bouwkundige keuring?</summary>
+            <p>Nee. De scan geeft informatief en indicatief inzicht in een aantal eigenschappen van je leefomgeving. We stellen geen diagnose en vervangen geen arts, laboratorium, elektricien of bouwkundige.</p>
+          </details>
+          <details>
+            <summary>Moet ik na de scan producten kopen?</summary>
+            <p>Nee. Wij verkopen geen meetapparatuur, lampen, waterfilters, afschermingsproducten, supplementen of andere aanvullende producten. De prijs geldt uitsluitend voor de scan, uitleg en rapportage. Je bepaalt zelf wat je daarna met de aandachtspunten doet.</p>
+          </details>
+          <details>
+            <summary>Worden er foto's in mijn huis gemaakt?</summary>
+            <p>Nee. We maken geen foto's of video-opnames van kamers en privébezittingen. In het rapport gebruiken we uitsluitend eenvoudige schematische tekeningen van ruimtes, meubels en meetpunten.</p>
+          </details>
+          <details>
+            <summary>Wanneer is de gratis herhaalscan interessant?</summary>
+            <p>Vooral wanneer je na de eerste scan zelf iets hebt aangepast en nieuwsgierig bent naar het verschil. Dan zijn wij dat ook. We komen geheel vrijblijvend en zonder extra kosten langs voor een korte scan en maken daarna een volledig visueel vergelijkingsrapport. De afspraak moet binnen acht weken na de eerste scan worden ingepland; daarna vervalt de gratis bonus. Iedere meting blijft een momentopname en omstandigheden kunnen per dag verschillen.</p>
+          </details>
+          <details>
+            <summary>Kan ik een bedrijfspand laten scannen?</summary>
+            <p>Ja, in overleg. Omdat de grootte, indeling en het aantal meetzones verschillen, maken we daarvoor vooraf een passende prijs.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="request" id="aanvragen">
+      <div class="request-grid shell">
+        <div class="reveal">
+          <p class="eyebrow">Vrijblijvende aanvraag</p>
+          <h2>Nieuwsgierig naar jouw woning?</h2>
+          <p class="lede">Stuur je aanvraag in en geef aan hoe je het liefst wordt benaderd. Bij voorkeur bellen we je voor het vrijblijvende voorgesprek. Heb je liever e-mail of WhatsApp, dan is dat uiteraard ook mogelijk.</p>
+          <ul class="contact-promises">
+            <li>Wij nemen zelf contact met je op</li>
+            <li>Bij voorkeur telefonisch, maar e-mail of WhatsApp kan ook</li>
+            <li>We beantwoorden al je vragen</li>
+            <li>Pas betalen wanneer de afspraak definitief is en we allebei akkoord zijn</li>
+            <li>Je telefoonnummer, adres en scanresultaten worden nooit openbaar gemaakt</li>
+          </ul>
+        </div>
+
+        <form class="form-card reveal" id="scan-form" data-endpoint="" novalidate>
+          <!-- ICT: vul data-endpoint hierboven met de beveiligde formulier-URL. -->
+          <div class="form-grid">
+            <div class="field">
+              <label for="naam">Naam</label>
+              <input id="naam" name="naam" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="telefoon">Telefoonnummer</label>
+              <input id="telefoon" name="telefoon" type="tel" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="field">
+              <label for="email">E-mailadres</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="postcode">Postcode en plaats</label>
+              <input id="postcode" name="postcode_plaats" autocomplete="postal-code" required>
+            </div>
+            <div class="field full">
+              <label for="contactvoorkeur">Hoe mogen we contact met je opnemen?</label>
+              <select id="contactvoorkeur" name="contactvoorkeur" required>
+                <option value="">Maak een keuze</option>
+                <option>Telefonisch (onze voorkeur)</option>
+                <option>Per e-mail</option>
+                <option>Via WhatsApp</option>
+                <option>Geen voorkeur</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="locatie">Wat wil je laten scannen?</label>
+              <select id="locatie" name="type_locatie" required>
+                <option value="">Maak een keuze</option>
+                <option>Woning in Nederland</option>
+                <option>Woning buiten Nederland</option>
+                <option>Bedrijfspand</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="bericht">Wat wil je alvast vertellen? <span class="optional">(niet verplicht)</span></label>
+              <textarea id="bericht" name="bericht" placeholder="Bijvoorbeeld je belangrijkste vraag of het type woning"></textarea>
+            </div>
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Website</label>
+              <input id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+          </div>
+          <label class="privacy-line" for="privacy">
+            <input id="privacy" name="privacy_akkoord" type="checkbox" required>
+            <span>Ik geef toestemming om mijn gegevens te gebruiken om contact op te nemen over deze aanvraag. Mijn gegevens worden niet gebruikt voor ongevraagde reclame.</span>
+          </label>
+          <button class="button" type="submit">Aanvraag versturen <span aria-hidden="true">→</span></button>
+          <p class="form-meta"><span aria-hidden="true">◆</span> Geen boeking · Geen betaling · Persoonlijk contact</p>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner shell">
+      <div>© <span id="year"></span> Total House Scan · Een initiatief van Biente Hocho</div>
+      <div class="footer-links">
+        <a href="mailto:info@totalhousescan.nl">info@totalhousescan.nl</a>
+        <a href="privacy.html">Privacy</a>
+        <span>KvK: in te vullen vóór publicatie</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      reveals.forEach((item) => observer.observe(item));
+    } else {
+      reveals.forEach((item) => item.classList.add('visible'));
+    }
+
+    const form = document.getElementById('scan-form');
+    const statusBox = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusBox.classList.remove('show');
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (form.elements.website.value) return;
+
+      const endpoint = form.dataset.endpoint.trim();
+      if (!endpoint) {
+        statusBox.textContent = 'De pagina is nog in concept. De veilige verzending naar info@totalhousescan.nl wordt vóór publicatie aangesloten.';
+        statusBox.classList.add('show');
+        return;
+      }
+
+      const button = form.querySelector('button[type="submit"]');
+      const originalText = button.innerHTML;
+      button.disabled = true;
+      button.textContent = 'Bezig met versturen…';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (!response.ok) throw new Error('Verzenden mislukt');
+        form.reset();
+        statusBox.textContent = 'Dank je. Je aanvraag is ontvangen en je zit nog nergens aan vast. Wij nemen contact met je op volgens de gekozen voorkeur en beantwoorden graag al je vragen.';
+      } catch (error) {
+        statusBox.innerHTML = 'Versturen lukt nu niet. Mail je aanvraag naar <a href="mailto:info@totalhousescan.nl">info@totalhousescan.nl</a>.';
+      } finally {
+        statusBox.classList.add('show');
+        button.disabled = false;
+        button.innerHTML = originalText;
+      }
+    });
+  </script>
+</body>
+</html>
