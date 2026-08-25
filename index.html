@@ -1442,6 +1442,7 @@
           <input type="hidden" name="_subject" value="Nieuwe scan-aanvraag via totalhousescan.nl">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_url" value="https://totalhousescan.nl/#aanvragen">
+          <input type="hidden" name="bron" id="aanvraag-bron" value="website">
           <div class="form-grid">
             <div class="field">
               <label for="naam">Naam</label>
@@ -1532,6 +1533,12 @@
 
     const form = document.getElementById('scan-form');
     const statusBox = document.getElementById('form-status');
+    const sourceInput = document.getElementById('aanvraag-bron');
+    const source = new URLSearchParams(window.location.search).get('bron');
+
+    if (source && /^[a-z0-9_-]{1,40}$/i.test(source)) {
+      sourceInput.value = source.toLowerCase();
+    }
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
